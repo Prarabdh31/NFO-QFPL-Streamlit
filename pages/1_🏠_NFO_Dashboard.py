@@ -5,7 +5,6 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import requests
 from datetime import datetime
-from pathlib import Path
 import numpy as np
 import os
 
@@ -21,11 +20,11 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Load centralized CSS (force UTF‑8, drop any undecodable bytes)
-css_path = Path('assets/styles/style.css')
-if css_path.exists():
-    css = css_path.read_text(encoding='utf-8', errors='ignore')
-    st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
+# Load centralized CSS
+css_file = 'assets/styles/style.css'
+if os.path.exists(css_file):
+    with open(css_file) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Initialize API client
 @st.cache_resource
@@ -59,7 +58,7 @@ def load_nfo_data():
 
 def display_header_metrics(data):
     """Display key metrics in the header - using centralized styles"""
-    st.markdown('<div class="nfo-main-header"><h1>🏠 Nottingham Forest FC - QFPL Command Center</h1></div>', unsafe_allow_html=True)
+    st.markdown('<div class="nfo-main-header"><h1>🏠 Nottingham Forest FC</h1></div>', unsafe_allow_html=True)
     
     if not data or not data['nfo_league']:
         st.warning("Unable to load league data. Please check API connection.")
@@ -246,7 +245,7 @@ def display_nfo_mini_league(data):
         st.info(f"🎯 **Total:** {total_points:,}")
 
 def display_main_league_position(data):
-    """Show NFO's position in main QFPL league - using centralized styles"""
+    """Show NFO's position in main QFPL league - using ID matching and table display"""
     st.subheader("🌟 Main QFPL League")
     
     if not data or not data['main_league']:
@@ -254,22 +253,72 @@ def display_main_league_position(data):
         return
     
     main_standings = data['main_league']['standings']['results']
-    nfo_teams = [team for team in main_standings if 'NFO' in team['entry_name'].upper() or 'FOREST' in team['entry_name'].upper()]
+    main_new_entries = data['main_league'].get('new_entries', {}).get('results', [])
     
-    if nfo_teams:
-        st.success(f"Found {len(nfo_teams)} NFO representatives in main league!")
+    # Get NFO player entry IDs from mini league
+    nfo_entry_ids = []
+    if data['nfo_league']:
+        nfo_entries = data['nfo_league'].get('new_entries', {}).get('results', [])
+        nfo_entry_ids = [player['entry'] for player in nfo_entries]
+    
+    nfo_teams = []
+    
+    if not main_standings and main_new_entries:
+        # Season hasn't started - check new_entries and match by entry ID
+        st.info("🎯 QFPL season hasn't started yet, but NFO players are joining the main league!")
         
-        for team in nfo_teams:
-            # Responsive team display
-            col1, col2 = st.columns(2)
-            with col1:
-                st.metric("Rank", f"#{team['rank']}")
-                st.metric("Total", team['total'])
-            with col2:
-                st.metric("Team", team['entry_name'][:20] + "..." if len(team['entry_name']) > 20 else team['entry_name'])
-                st.metric("GW", team['event_total'])
+        # Find NFO players in main league using entry ID matching
+        for entry in main_new_entries:
+            if entry['entry'] in nfo_entry_ids:
+                nfo_teams.append(entry)
+        
+        if nfo_teams:
+            st.success(f"Found {len(nfo_teams)} NFO players in main QFPL league!")
+            
+            # Create table data
+            table_data = []
+            for team in nfo_teams:
+                table_data.append({
+                    'Player': f"{team['player_first_name']} {team['player_last_name']}",
+                    'Team Name': team['entry_name'],
+                    'Joined': team['joined_time'][:10]  # Just the date
+                })
+            
+            # Display as clean table
+            df = pd.DataFrame(table_data)
+            st.dataframe(df, use_container_width=True, hide_index=True)
+            
+        else:
+            st.warning("No NFO players found in main QFPL league yet. They may still be joining!")
+            
+    elif main_standings:
+        # Season has started - check standings and match by entry ID
+        for team in main_standings:
+            if team['entry'] in nfo_entry_ids:
+                nfo_teams.append(team)
+        
+        if nfo_teams:
+            st.success(f"Found {len(nfo_teams)} NFO representatives in main league!")
+            
+            # Create table data for active season
+            table_data = []
+            for team in nfo_teams:
+                table_data.append({
+                    'Rank': f"#{team['rank']}",
+                    'Player': team.get('player_name', 'Unknown'),
+                    'Team Name': team['entry_name'],
+                    'Total Points': team['total'],
+                    'GW Points': team['event_total']
+                })
+            
+            # Display as clean table
+            df = pd.DataFrame(table_data)
+            st.dataframe(df, use_container_width=True, hide_index=True)
+            
+        else:
+            st.info("NFO teams not yet identified in main league standings.")
     else:
-        st.info("NFO teams not yet identified in main league standings. They may be using different team names.")
+        st.info("Main QFPL league data not available yet.")
 
 def display_performance_charts(data):
     """Display performance visualization charts - using centralized styles"""

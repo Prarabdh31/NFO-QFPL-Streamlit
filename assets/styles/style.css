@@ -386,3 +386,170 @@ button:focus {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* =================================
+   LIGHT & DARK MODE SUPPORT FOR CARDS
+   ================================= */
+
+/* DEFAULT LIGHT MODE - Explicit Definition */
+[data-testid="metric-container"],
+.metric-container,
+.stMetric,
+.css-1r6slb0,
+.css-k1vhr4 {
+    background: #ffffff !important; /* White background for light mode */
+    border: 1px solid #e5e7eb !important; /* Light gray border */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important; /* Subtle shadow */
+}
+
+    /* Light mode hover effects */
+    [data-testid="metric-container"]:hover,
+    .metric-container:hover,
+    .stMetric:hover,
+    .css-1r6slb0:hover,
+    .css-k1vhr4:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    }
+
+    /* Light mode labels */
+    [data-testid="metric-container"] label,
+    .metric-container label,
+    .stMetric label,
+    .css-1r6slb0 label,
+    .css-k1vhr4 label {
+        color: #6b7280 !important; /* Gray for labels */
+    }
+
+    /* Light mode values */
+    [data-testid="metric-container"] [data-testid="metric-value"],
+    .metric-container [data-testid="metric-value"],
+    .stMetric [data-testid="metric-value"],
+    .css-1r6slb0 [data-testid="metric-value"],
+    .css-k1vhr4 [data-testid="metric-value"] {
+        color: #111827 !important; /* Dark text for values */
+    }
+
+    /* Light mode fallback for last-child */
+    [data-testid="metric-container"] > div:last-child,
+    .metric-container > div:last-child,
+    .stMetric > div > div:last-child,
+    .css-1r6slb0 > div:last-child,
+    .css-k1vhr4 > div:last-child {
+        color: #111827 !important;
+    }
+
+/* =================================
+   DARK MODE - Multiple Detection Methods
+   ================================= */
+
+/* Method 1: Color scheme detection */
+@media (prefers-color-scheme: dark) {
+    [data-testid="metric-container"],
+    .metric-container,
+    .stMetric,
+    .css-1r6slb0,
+    .css-k1vhr4 {
+        background: #1f2937 !important;
+        border: 1px solid #374151 !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    }
+
+        [data-testid="metric-container"]:hover,
+        .metric-container:hover,
+        .stMetric:hover,
+        .css-1r6slb0:hover,
+        .css-k1vhr4:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
+            border-color: #4b5563 !important;
+        }
+
+        [data-testid="metric-container"] label,
+        .metric-container label,
+        .stMetric label,
+        .css-1r6slb0 label,
+        .css-k1vhr4 label {
+            color: #9ca3af !important;
+        }
+
+        [data-testid="metric-container"] [data-testid="metric-value"],
+        .metric-container [data-testid="metric-value"],
+        .stMetric [data-testid="metric-value"],
+        .css-1r6slb0 [data-testid="metric-value"],
+        .css-k1vhr4 [data-testid="metric-value"] {
+            color: #f9fafb !important;
+        }
+
+        [data-testid="metric-container"] > div:last-child,
+        .metric-container > div:last-child,
+        .stMetric > div > div:last-child,
+        .css-1r6slb0 > div:last-child,
+        .css-k1vhr4 > div:last-child {
+            color: #f9fafb !important;
+        }
+}
+
+/* Method 2: Streamlit data-theme attribute */
+[data-theme="dark"] [data-testid="metric-container"],
+html[data-theme="dark"] [data-testid="metric-container"],
+body[data-theme="dark"] [data-testid="metric-container"],
+.stApp[data-theme="dark"] [data-testid="metric-container"] {
+    background: #1f2937 !important;
+    border: 1px solid #374151 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+    [data-theme="dark"] [data-testid="metric-container"] label,
+    html[data-theme="dark"] [data-testid="metric-container"] label,
+    body[data-theme="dark"] [data-testid="metric-container"] label,
+    .stApp[data-theme="dark"] [data-testid="metric-container"] label {
+        color: #9ca3af !important;
+    }
+
+    [data-theme="dark"] [data-testid="metric-container"] [data-testid="metric-value"],
+    html[data-theme="dark"] [data-testid="metric-container"] [data-testid="metric-value"],
+    body[data-theme="dark"] [data-testid="metric-container"] [data-testid="metric-value"],
+    .stApp[data-theme="dark"] [data-testid="metric-container"] [data-testid="metric-value"] {
+        color: #f9fafb !important;
+    }
+
+/* Method 3: CSS classes for dark mode */
+.dark [data-testid="metric-container"],
+.stApp.dark [data-testid="metric-container"],
+html.dark [data-testid="metric-container"],
+body.dark [data-testid="metric-container"] {
+    background: #1f2937 !important;
+    border: 1px solid #374151 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+    .dark [data-testid="metric-container"] label,
+    .stApp.dark [data-testid="metric-container"] label,
+    html.dark [data-testid="metric-container"] label,
+    body.dark [data-testid="metric-container"] label {
+        color: #9ca3af !important;
+    }
+
+    .dark [data-testid="metric-container"] [data-testid="metric-value"],
+    .stApp.dark [data-testid="metric-container"] [data-testid="metric-value"],
+    html.dark [data-testid="metric-container"] [data-testid="metric-value"],
+    body.dark [data-testid="metric-container"] [data-testid="metric-value"] {
+        color: #f9fafb !important;
+    }
+
+/* Method 4: Streamlit's color-scheme detection */
+[data-color-scheme="dark"] [data-testid="metric-container"],
+.stApp[data-color-scheme="dark"] [data-testid="metric-container"] {
+    background: #1f2937 !important;
+    border: 1px solid #374151 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+    [data-color-scheme="dark"] [data-testid="metric-container"] label,
+    .stApp[data-color-scheme="dark"] [data-testid="metric-container"] label {
+        color: #9ca3af !important;
+    }
+
+    [data-color-scheme="dark"] [data-testid="metric-container"] [data-testid="metric-value"],
+    .stApp[data-color-scheme="dark"] [data-testid="metric-container"] [data-testid="metric-value"] {
+        color: #f9fafb !important;
+    }
