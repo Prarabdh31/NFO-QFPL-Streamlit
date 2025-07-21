@@ -1,35 +1,337 @@
-/* NFO QFPL Dashboard Styles */
+/* NFO QFPL Dashboard - Enhanced Style System */
+
+/* =================================
+   CORE LAYOUT & RESPONSIVENESS
+   ================================= */
+
 .main .block-container {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 100%;
 }
+
+/* =================================
+   HEADER COMPONENTS
+   ================================= */
+
+/* Main dashboard headers */
+.nfo-main-header {
+    background: linear-gradient(135deg, #DD0000, #FF4444, #DD0000);
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 8px rgba(221, 0, 0, 0.3);
+}
+
+    .nfo-main-header h1 {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        margin: 0;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+/* Section headers */
+h2, h3 {
+    color: #DD0000;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* =================================
+   METRICS & CARDS SYSTEM
+   ================================= */
+
+/* Responsive metrics containers with enhanced styling */
+[data-testid="metric-container"] {
+    background: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 10px;
+    padding: 0.75rem 0.6rem;
+    margin: 0.25rem 0;
+    min-height: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+    /* Hover effect for cards */
+    [data-testid="metric-container"]:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
+        border-color: #d1d5db;
+        transform: translateY(-1px);
+    }
+
+    /* Subtle accent border on left */
+    [data-testid="metric-container"]::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, #DD0000, #FF4444);
+        border-radius: 0 2px 2px 0;
+    }
+
+    [data-testid="metric-container"] > div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Metric labels - smaller, refined sizing */
+    [data-testid="metric-container"] label {
+        font-size: clamp(0.5rem, 1vw, 0.62rem) !important;
+        font-weight: 600 !important;
+        color: #6b7280 !important;
+        margin-bottom: 0.2rem !important;
+        line-height: 1.1 !important;
+        letter-spacing: 0.025em !important;
+        text-transform: uppercase !important;
+    }
+
+    /* Metric values - smaller, cleaner sizing */
+    [data-testid="metric-container"] [data-testid="metric-value"] {
+        font-size: clamp(0.65rem, 1.3vw, 0.8rem) !important;
+        font-weight: 700 !important;
+        color: #DD0000 !important;
+        line-height: 1.0 !important;
+        letter-spacing: -0.01em !important;
+    }
+
+/* Sidebar open state - even smaller fonts */
+.css-1kyxreq [data-testid="metric-container"] {
+    min-height: 65px;
+    padding: 0.6rem 0.5rem;
+}
+
+    .css-1kyxreq [data-testid="metric-container"] label {
+        font-size: clamp(0.45rem, 0.8vw, 0.55rem) !important;
+    }
+
+    .css-1kyxreq [data-testid="metric-container"] [data-testid="metric-value"] {
+        font-size: clamp(0.6rem, 1.1vw, 0.7rem) !important;
+    }
+
+/* =================================
+   TABLE & DATA DISPLAY
+   ================================= */
+
+/* Responsive tables without scrollbars */
+.stDataFrame {
+    overflow-x: visible;
+}
+
+    .stDataFrame table {
+        width: 100%;
+        table-layout: auto;
+    }
+
+.dataframe {
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+}
+
+/* =================================
+   ALERT & STATUS COMPONENTS
+   ================================= */
+
+/* Info boxes styling */
+.stAlert > div {
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    padding: 0.75rem;
+}
+
+/* Custom status indicators for special cases */
+.nfo-status-complete {
+    background: linear-gradient(90deg, #28a745, #34ce57);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+.nfo-status-pending {
+    background: linear-gradient(90deg, #ffc107, #ffcd39);
+    color: #333;
+    padding: 0.5rem;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+.nfo-status-info {
+    background: linear-gradient(90deg, #17a2b8, #20c997);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+/* =================================
+   CHARTS & VISUALIZATIONS
+   ================================= */
+
+/* Chart responsiveness */
+.plotly-graph-div {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* =================================
+   TABS & NAVIGATION
+   ================================= */
+
+/* Tab styling for mobile */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 0.25rem;
+}
+
+.stTabs [data-baseweb="tab"] {
+    padding: 0.5rem 0.75rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+}
+
+/* =================================
+   SIDEBAR COMPONENTS
+   ================================= */
 
 .sidebar .sidebar-content {
     background-color: #f8f9fa;
 }
 
-/* Custom metrics styling */
-[data-testid="metric-container"] {
-    background-color: #ffffff;
-    border: 1px solid #e6e9ef;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.css-1d391kg {
+    padding-top: 1rem;
 }
 
-/* Team colors for future use */
+/* =================================
+   UTILITY CLASSES
+   ================================= */
+
+/* NFO brand colors */
 .nfo-primary {
     color: #DD0000;
 }
 
-.liv-primary {
-    color: #C8102E;
+.nfo-secondary {
+    color: #FF4444;
 }
 
-.mci-primary {
-    color: #6CABDD;
+.nfo-text {
+    color: #333;
 }
 
-.ars-primary {
-    color: #EF0107;
+/* Performance indicators */
+.performance-up {
+    color: #28a745;
+}
+
+.performance-down {
+    color: #dc3545;
+}
+
+.performance-neutral {
+    color: #6c757d;
+}
+
+/* Responsive spacing */
+.nfo-spacing-sm {
+    margin: 0.5rem 0;
+}
+
+.nfo-spacing-md {
+    margin: 1rem 0;
+}
+
+.nfo-spacing-lg {
+    margin: 1.5rem 0;
+}
+
+/* =================================
+   MOBILE OPTIMIZATION
+   ================================= */
+
+@media (max-width: 768px) {
+    .main .block-container {
+        padding: 0.5rem;
+    }
+
+    .nfo-main-header {
+        padding: 1rem 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    [data-testid="metric-container"] {
+        padding: 0.6rem 0.4rem;
+        min-height: 60px;
+    }
+
+        [data-testid="metric-container"] label {
+            font-size: clamp(0.45rem, 0.9vw, 0.5rem) !important;
+        }
+
+        [data-testid="metric-container"] [data-testid="metric-value"] {
+            font-size: clamp(0.6rem, 1.2vw, 0.7rem) !important;
+        }
+
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 0.25rem;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* =================================
+   DESKTOP OPTIMIZATION
+   ================================= */
+
+@media (min-width: 1200px) {
+    .main .block-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+}
+
+/* =================================
+   ACCESSIBILITY
+   ================================= */
+
+/* Focus indicators */
+button:focus {
+    outline: 2px solid #DD0000;
+    outline-offset: 2px;
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+    [data-testid="metric-container"] {
+        border: 2px solid #333;
+    }
+
+    .nfo-main-header {
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

@@ -12,14 +12,14 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS (only load if file exists)
+# Load centralized CSS
 css_file = 'assets/styles/style.css'
 if os.path.exists(css_file):
     with open(css_file) as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 def main():
-    st.title("⚽ NFO QFPL Dashboard")
+    st.markdown('<div class="nfo-main-header"><h1>⚽ NFO QFPL Dashboard</h1></div>', unsafe_allow_html=True)
     st.markdown("---")
     
     # Sidebar
