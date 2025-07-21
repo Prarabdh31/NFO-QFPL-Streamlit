@@ -1,4 +1,4 @@
-/* NFO QFPL Dashboard - Enhanced Style System */
+﻿/* NFO QFPL Dashboard - Clean Style System */
 
 /* =================================
    CORE LAYOUT & RESPONSIVENESS
@@ -42,82 +42,126 @@ h2, h3 {
 }
 
 /* =================================
-   METRICS & CARDS SYSTEM
+   METRICS & CARDS SYSTEM – MODERN
    ================================= */
 
-/* Responsive metrics containers with enhanced styling */
-[data-testid="metric-container"] {
-    background: white;
-    border: 1px solid #e1e5e9;
-    border-radius: 10px;
-    padding: 0.75rem 0.6rem;
-    margin: 0.25rem 0;
-    min-height: 75px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: all 0.2s ease-in-out;
-    position: relative;
-    overflow: hidden;
+/* Outer container only */
+[data-testid="metric-container"],
+.metric-container,
+.stMetric,
+.css-1r6slb0,
+.css-k1vhr4 {
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0.75rem !important;
+    padding: 1rem !important;
+    margin: 0.5rem 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    text-align: center !important;
+    overflow: visible !important;
 }
 
-    /* Hover effect for cards */
-    [data-testid="metric-container"]:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
-        border-color: #d1d5db;
-        transform: translateY(-1px);
+    /* Hover lift + deeper shadow */
+    [data-testid="metric-container"]:hover,
+    .metric-container:hover,
+    .stMetric:hover,
+    .css-1r6slb0:hover,
+    .css-k1vhr4:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
     }
 
-    /* Subtle accent border on left */
-    [data-testid="metric-container"]::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 3px;
-        background: linear-gradient(180deg, #DD0000, #FF4444);
-        border-radius: 0 2px 2px 0;
+    /* Inner wrapper – strip any box styling */
+    [data-testid="metric-container"] > div,
+    .metric-container > div,
+    .stMetric > div,
+    .css-1r6slb0 > div,
+    .css-k1vhr4 > div {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
     }
 
-    [data-testid="metric-container"] > div {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    /* Metric labels - smaller, refined sizing */
-    [data-testid="metric-container"] label {
-        font-size: clamp(0.5rem, 1vw, 0.62rem) !important;
+    /* LABEL – full wrap & inline tooltip */
+    [data-testid="metric-container"] label,
+    .metric-container label,
+    .stMetric label,
+    .css-1r6slb0 label,
+    .css-k1vhr4 label {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        white-space: break-spaces !important;
+        word-break: break-word !important;
+        font-size: clamp(0.6rem, 1vw, 0.85rem) !important;
         font-weight: 600 !important;
         color: #6b7280 !important;
-        margin-bottom: 0.2rem !important;
-        line-height: 1.1 !important;
-        letter-spacing: 0.025em !important;
+        line-height: 1 !important; /* perfect vertical centering */
         text-transform: uppercase !important;
+        gap: 0.25rem !important;
+        margin-bottom: 0.4rem !important;
     }
 
-    /* Metric values - smaller, cleaner sizing */
-    [data-testid="metric-container"] [data-testid="metric-value"] {
-        font-size: clamp(0.65rem, 1.3vw, 0.8rem) !important;
+    /* VALUE – slightly smaller & still responsive */
+    [data-testid="metric-container"] [data-testid="metric-value"],
+    .metric-container [data-testid="metric-value"],
+    .stMetric [data-testid="metric-value"],
+    .css-1r6slb0 [data-testid="metric-value"],
+    .css-k1vhr4 [data-testid="metric-value"] {
+        font-size: clamp(1.2rem, 2.5vw, 1.8rem) !important;
         font-weight: 700 !important;
-        color: #DD0000 !important;
-        line-height: 1.0 !important;
-        letter-spacing: -0.01em !important;
+        color: #111827 !important;
+        line-height: 1.1 !important;
+        letter-spacing: -0.02em !important;
+        margin-top: 0.25rem !important;
     }
 
-/* Sidebar open state - even smaller fonts */
-.css-1kyxreq [data-testid="metric-container"] {
-    min-height: 65px;
-    padding: 0.6rem 0.5rem;
+    /* Fallback for last-child value selector */
+    [data-testid="metric-container"] > div:last-child,
+    .metric-container > div:last-child,
+    .stMetric > div > div:last-child,
+    .css-1r6slb0 > div:last-child,
+    .css-k1vhr4 > div:last-child {
+        font-size: clamp(1.2rem, 2.5vw, 1.8rem) !important;
+    }
+
+/* Tooltip icon exact middle */
+.tooltip-icon {
+    display: inline-block !important;
+    vertical-align: middle !important;
 }
 
-    .css-1kyxreq [data-testid="metric-container"] label {
+
+/* =================================
+   SIDEBAR ADJUSTMENTS
+   ================================= */
+
+/* Sidebar open state - smaller fonts and containers */
+.css-1kyxreq [data-testid="metric-container"],
+.css-1kyxreq .metric-container,
+.css-1kyxreq .stMetric,
+.css-1kyxreq .stMetric > div {
+    min-height: 65px !important;
+    padding: 0.6rem 0.5rem !important;
+}
+
+    .css-1kyxreq [data-testid="metric-container"] label,
+    .css-1kyxreq .metric-container label,
+    .css-1kyxreq .stMetric label {
         font-size: clamp(0.45rem, 0.8vw, 0.55rem) !important;
     }
 
-    .css-1kyxreq [data-testid="metric-container"] [data-testid="metric-value"] {
-        font-size: clamp(0.6rem, 1.1vw, 0.7rem) !important;
+    .css-1kyxreq [data-testid="metric-container"] [data-testid="metric-value"],
+    .css-1kyxreq .metric-container [data-testid="metric-value"],
+    .css-1kyxreq .stMetric [data-testid="metric-value"] {
+        font-size: clamp(0.75rem, 1.5vw, 0.95rem) !important;
     }
 
 /* =================================
@@ -272,17 +316,24 @@ h2, h3 {
         margin-bottom: 1rem;
     }
 
-    [data-testid="metric-container"] {
-        padding: 0.6rem 0.4rem;
-        min-height: 60px;
+    [data-testid="metric-container"],
+    .metric-container,
+    .stMetric,
+    .stMetric > div {
+        padding: 0.6rem 0.4rem !important;
+        min-height: 60px !important;
     }
 
-        [data-testid="metric-container"] label {
+        [data-testid="metric-container"] label,
+        .metric-container label,
+        .stMetric label {
             font-size: clamp(0.45rem, 0.9vw, 0.5rem) !important;
         }
 
-        [data-testid="metric-container"] [data-testid="metric-value"] {
-            font-size: clamp(0.6rem, 1.2vw, 0.7rem) !important;
+        [data-testid="metric-container"] [data-testid="metric-value"],
+        .metric-container [data-testid="metric-value"],
+        .stMetric [data-testid="metric-value"] {
+            font-size: clamp(0.7rem, 1.4vw, 0.85rem) !important;
         }
 
     .stTabs [data-baseweb="tab-list"] {

@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import requests
 from datetime import datetime
+from pathlib import Path
 import numpy as np
 import os
 
@@ -20,11 +21,11 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Load centralized CSS
-css_file = 'assets/styles/style.css'
-if os.path.exists(css_file):
-    with open(css_file) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+# Load centralized CSS (force UTF‑8, drop any undecodable bytes)
+css_path = Path('assets/styles/style.css')
+if css_path.exists():
+    css = css_path.read_text(encoding='utf-8', errors='ignore')
+    st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
 # Initialize API client
 @st.cache_resource
