@@ -1,7 +1,8 @@
 ﻿import streamlit as st
 import pandas as pd
-from utils.constants import TEAMS, COLORS
+from utils.constants import TEAMS, TEAM_COLORS
 from utils.fpl_api import FPLApiClient
+import os
 
 # Page config
 st.set_page_config(
@@ -11,9 +12,11 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
-with open('assets/styles/style.css') as f:
-    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+# Custom CSS (only load if file exists)
+css_file = 'assets/styles/style.css'
+if os.path.exists(css_file):
+    with open(css_file) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 def main():
     st.title("⚽ NFO QFPL Dashboard")

@@ -1,0 +1,35 @@
+/* NFO QFPL Dashboard Styles */
+.main .block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.sidebar .sidebar-content {
+    background-color: #f8f9fa;
+}
+
+/* Custom metrics styling */
+[data-testid="metric-container"] {
+    background-color: #ffffff;
+    border: 1px solid #e6e9ef;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Team colors for future use */
+.nfo-primary {
+    color: #DD0000;
+}
+
+.liv-primary {
+    color: #C8102E;
+}
+
+.mci-primary {
+    color: #6CABDD;
+}
+
+.ars-primary {
+    color: #EF0107;
+}
