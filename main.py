@@ -6,8 +6,8 @@ import os
 
 # Page config
 st.set_page_config(
-    page_title="NFO QFPL Dashboard",
-    page_icon="⚽",
+    page_title="NFO QFPL Dashboard - Home",
+    page_icon="🏠",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -19,36 +19,91 @@ if os.path.exists(css_file):
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 def main():
-    st.markdown('<div class="nfo-main-header"><h1>⚽ NFO QFPL Dashboard</h1></div>', unsafe_allow_html=True)
+    st.markdown('<div class="nfo-main-header"><h1>🏠 NFO QFPL Dashboard - Home</h1></div>', unsafe_allow_html=True)
     st.markdown("---")
     
-    # Sidebar
+    # Sidebar Navigation
     with st.sidebar:
-        st.header("🏆 QFPL Central")
-        st.info("Dashboard & Analytics for NFO Team")
+        st.header("🏆 QFPL Navigation")
+        st.info("Navigate through different dashboard views")
         
-        # Quick stats placeholder
-        st.metric("Current Gameweek", "12")
-        st.metric("NFO Team Rank", "3rd")
-        st.metric("Points This Week", "78")
+        st.markdown("### 📊 Dashboard Pages")
+        st.page_link("main.py", label="🏠 Home", icon="🏠")
+        st.page_link("pages/1_🏠_NFO_Dashboard.py", label="🌲 NFO Dashboard", icon="🌲")
+        st.page_link("pages/2_📊_QFPL_Dashboard.py", label="🏆 QFPL Dashboard", icon="🏆")
+        st.page_link("pages/3_⚡_GW_Live.py", label="⚡ GW Live", icon="⚡")
+        st.page_link("pages/4_🧠_Intelligence.py", label="🧠 Intelligence", icon="🧠")
+        
+        st.markdown("---")
+        st.caption("📱 Mobile optimized")
+        st.caption("🖥️ Desktop ready")
     
-    # Main content
+    # Home page content
+    st.markdown("## Welcome to NFO QFPL Command Center")
+    
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        st.header("📊 Team Overview")
-        st.info("Team performance metrics and standings")
+        st.header("🌲 NFO Dashboard")
+        st.info("Deep dive into NFO team performance, squad analysis, and mini-league standings.")
+        if st.button("Go to NFO Dashboard", use_container_width=True):
+            st.switch_page("pages/1_🏠_NFO_Dashboard.py")
         
     with col2:
-        st.header("⚔️ Upcoming Fixtures")
-        st.info("Next gameweek predictions and analysis")
+        st.header("🏆 QFPL Dashboard")
+        st.info("Overview of the main QFPL league with all 20 teams, fixtures, and cross-team analysis.")
+        if st.button("Go to QFPL Dashboard", use_container_width=True):
+            st.switch_page("pages/2_📊_QFPL_Dashboard.py")
         
     with col3:
-        st.header("🔥 Hot Topics")
-        st.info("Transfer insights and trending players")
+        st.header("⚡ GW Live")
+        st.info("Real-time gameweek tracking, live scores, and match-by-match analysis.")
+        if st.button("Go to GW Live", use_container_width=True):
+            st.switch_page("pages/3_⚡_GW_Live.py")
     
     st.markdown("---")
-    st.markdown("**Navigate using the sidebar to explore different analytics views!**")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.header("🧠 Intelligence")
+        st.info("Advanced analytics, transfer intelligence, squad comparisons, and strategic insights.")
+        if st.button("Go to Intelligence", use_container_width=True):
+            st.switch_page("pages/4_🧠_Intelligence.py")
+    
+    with col2:
+        st.header("📈 Quick Stats")
+        st.metric("Current Gameweek", "GW 1")
+        st.metric("NFO Squad Size", "6/11")
+        st.metric("Season Status", "Pre-season")
+    
+    st.markdown("---")
+    st.markdown("### 🎯 Features Overview")
+    
+    features_col1, features_col2 = st.columns(2)
+    
+    with features_col1:
+        st.markdown("""
+        **📊 Analytics Features:**
+        - Real-time squad analysis
+        - Transfer intelligence tracking
+        - Head-to-head comparisons
+        - Popular picks analysis
+        - Fixture difficulty ratings
+        """)
+    
+    with features_col2:
+        st.markdown("""
+        **⚡ Live Features:**
+        - Live gameweek scoring
+        - Real-time league standings
+        - Match-by-match tracking
+        - Performance alerts
+        - Captain choice analysis
+        """)
+    
+    st.markdown("---")
+    st.markdown("**🚀 Ready to explore the most comprehensive QFPL analytics platform!**")
 
 if __name__ == "__main__":
     main()

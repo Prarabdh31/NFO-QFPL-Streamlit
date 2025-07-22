@@ -58,7 +58,7 @@ def load_nfo_data():
 
 def display_header_metrics(data):
     """Display key metrics in the header - using centralized styles"""
-    st.markdown('<div class="nfo-main-header"><h1>🏠 Nottingham Forest FC</h1></div>', unsafe_allow_html=True)
+    st.markdown('<div class="nfo-main-header"><h1>🏠 Nottingham Forest FC - QFPL Command Center</h1></div>', unsafe_allow_html=True)
     
     if not data or not data['nfo_league']:
         st.warning("Unable to load league data. Please check API connection.")
@@ -416,10 +416,17 @@ def display_performance_charts(data):
             st.metric("Total Combined", f"{total_points:,}")
 
 def main():
-    # Sidebar with clean design
+    # Sidebar with navigation
     with st.sidebar:
-        st.markdown("### 🏠 NFO Dashboard")
-        st.success("Dashboard Active")
+        st.markdown("### 🌲 NFO Dashboard")
+        st.success("NFO Team Analytics")
+        
+        st.markdown("### 📊 Navigation")
+        st.page_link("main.py", label="🏠 Home", icon="🏠")
+        st.page_link("pages/1_🏠_NFO_Dashboard.py", label="🌲 NFO Dashboard", icon="🌲")
+        st.page_link("pages/2_📊_QFPL_Dashboard.py", label="🏆 QFPL Dashboard", icon="🏆")
+        st.page_link("pages/3_⚡_GW_Live.py", label="⚡ GW Live", icon="⚡")
+        st.page_link("pages/4_🧠_Intelligence.py", label="🧠 Intelligence", icon="🧠")
         
         # Compact refresh button
         if st.button("🔄 Refresh", help="Get latest data", use_container_width=True):
@@ -427,8 +434,8 @@ def main():
             st.rerun()
         
         st.markdown("---")
+        st.caption("🌲 NFO Team Focus")
         st.caption("📱 Mobile optimized")
-        st.caption("🖥️ Desktop ready")
     
     # Load data with spinner
     with st.spinner("Loading NFO data..."):
