@@ -30,6 +30,7 @@ def get_api_client():
 
 api = get_api_client()
 
+
 def main():
     # Sidebar Navigation
     with st.sidebar:
